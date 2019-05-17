@@ -8,4 +8,4 @@ code is not well written , used postman to simply generate the code and paste it
 
 2, go run safaribooks.go
 
-### please feel free to contribute (i know this coding sucks :p)
+### please feel free to contribute (i know this code sucks :p)
