@@ -1,6 +1,7 @@
 package models
 
 import (
+	"bufio"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -160,6 +161,55 @@ func getChapterContent(login *LoginResponse, chapter BookChapter, bookCover stri
 	err := ioutil.WriteFile(rootPath+"/"+bookCover+".html", body, 0644)
 	if err != nil {
 		panic(err)
+	}
+
+	//##mimetype
+
+	createFile(rootPath+"/mimetype", "application/epub+zip")
+
+	//##
+	CreateDirIfNotExist(rootPath + "/META-INF")
+
+	optionsXML := `<?xml version="1.0" encoding="UTF-8"?>
+		<display_options>
+		<platform name="*">
+			<option name="specified-fonts">true</option>
+		</platform>
+	</display_options>
+	`
+
+	contentXML := `<?xml version="1.0" encoding="UTF-8"?><container xmlns="urn:oasis:names:tc:opendocument:xmlns:container" version="1.0">
+		<rootfiles>
+			<rootfile full-path="OEBPS/package.opf" media-type="application/oebps-package+xml"/>
+		</rootfiles>
+	</container>
+	`
+
+	//##
+	createFile(rootPath+"/META-INF/com.apple.ibooks.display-options.xml", optionsXML)
+
+	//##
+
+	createFile(rootPath+"/META-INF/container.xml", contentXML)
+}
+
+func createFile(path, content string) {
+
+	if _, errF := os.Stat(path); os.IsNotExist(errF) {
+
+		f, err := os.Create(path)
+		if err != nil {
+			panic(err)
+		}
+
+		defer f.Close()
+
+		w := bufio.NewWriter(f)
+		n4, err := w.WriteString(content)
+		fmt.Printf("wrote %d bytes\n", n4)
+
+		w.Flush()
+
 	}
 
 }
