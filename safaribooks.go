@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/rahulvramesh/safari-go/models"
+	"github.com/sivsivsree/oreilly-books-grabber/models"
 )
 
 func main() {
