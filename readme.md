@@ -1,13 +1,13 @@
 # oreilly-books-grabber - education purpose only
 
-IMP : At the moment only saves chapters as html, epub addon going on.
+IMP : At the moment the login credentials is not encrypted in the file.
 
-code is not well written , used postman to simply generate the code and paste it. will be updating on free time.
+## Usage
 
-## HOW TO
+1, ```safaribooks login``` to login to your account.
 
-1, update login info in safaribooks.go also the book id
+2, ```safaribooks grab <bookId> ``` to fetech the book 
 
-2, go run safaribooks.go
+3, ```safaribooks logout``` to logout from the account.
 
-### please feel free to contribute (i know this code sucks :p)
+
